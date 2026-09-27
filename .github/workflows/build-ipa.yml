@@ -1,0 +1,53 @@
+name: Build Unsigned iOS IPA (FlareStore)
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build & Package ApexTelemetry.ipa
+    runs-on: macos-14 # Apple Silicon M1/M2 runner with Xcode 15+
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Select Xcode Version
+        run: |
+          echo "Available Xcode installations:"
+          xcrun --find xcodebuild
+          xcodebuild -version
+
+      - name: Grant Execute Permissions to Build Script
+        run: chmod +x build_ipa.sh
+
+      - name: Compile and Package IPA
+        run: |
+          ./build_ipa.sh
+
+      - name: Verify IPA Integrity
+        run: |
+          if [ -f "ApexTelemetry.ipa" ]; then
+            echo "✅ ApexTelemetry.ipa successfully generated."
+            ls -lh ApexTelemetry.ipa
+            unzip -l ApexTelemetry.ipa | head -n 25
+          else
+            echo "❌ ApexTelemetry.ipa was not found!"
+            exit 1
+          fi
+
+      - name: Upload IPA Artifact for FlareStore
+        uses: actions/upload-artifact@v4
+        with:
+          name: ApexTelemetry-unsigned-ipa
+          path: ApexTelemetry.ipa
+          retention-days: 14
+          if-no-files-found: error

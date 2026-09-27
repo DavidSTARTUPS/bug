@@ -1,0 +1,23 @@
+# Xcode
+## User settings
+xcuserdata/
+*.xcworkspace/xcuserdata/
+*.xcuserdatad/
+
+## Build generated
+build/
+DerivedData/
+*.ipa
+Payload/
+*.dSYM.zip
+*.dSYM
+
+## macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+## Windows
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
