@@ -196,25 +196,7 @@ public struct SettingsView: View {
                 .font(.system(size: 11, weight: .black, design: .monospaced))
                 .foregroundColor(.textMuted)
             
-            // Reload Sample Data
-            Button(action: {
-                TelemetryHaptics.success()
-                storage.loadSampleData()
-                importStatusMessage = "Exemplele BAC / UPB au fost reîncărcate."
-            }) {
-                HStack {
-                    Image(systemName: "arrow.clockwise.circle.fill")
-                        .foregroundColor(.telemetryCyan)
-                    Text("Reîncarcă Exemplele Recomandate")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundColor(.white)
-                    Spacer()
-                }
-                .padding(14)
-                .telemetryCard()
-            }
-            .buttonStyle(PlainButtonStyle())
-            
+
             // Wipe All
             Button(action: {
                 TelemetryHaptics.warning()

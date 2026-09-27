@@ -494,20 +494,42 @@ public struct DashboardView: View {
                     .padding(.horizontal, 32)
             }
             
-            Button(action: {
-                viewModel.storage.loadSampleData()
-                TelemetryHaptics.success()
-                viewModel.showToast("Baza de date reîncărcată cu exemple.")
-            }) {
-                Text("Încarcă Exemple BAC / UPB")
-                    .font(.system(size: 12, weight: .semibold, design: .monospaced))
-                    .foregroundColor(.telemetryCyan)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 8)
-                    .background(Color.telemetryCyan.opacity(0.12))
+            HStack(spacing: 12) {
+                Button(action: {
+                    viewModel.ingestFromClipboard()
+                }) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "doc.on.clipboard.fill")
+                            .font(.system(size: 12, weight: .bold))
+                        Text("Paste Log")
+                            .font(.system(size: 13, weight: .semibold))
+                    }
+                    .foregroundColor(.black)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 10)
+                    .background(Color.white)
                     .clipShape(Capsule())
+                }
+                .buttonStyle(PlainButtonStyle())
+                
+                Button(action: {
+                    viewModel.openManualEntry()
+                }) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "plus")
+                            .font(.system(size: 12, weight: .bold))
+                        Text("Manual")
+                            .font(.system(size: 13, weight: .semibold))
+                    }
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 10)
+                    .background(Color.surfaceDark)
+                    .clipShape(Capsule())
+                    .overlay(Capsule().stroke(Color.borderSubtle, lineWidth: 1))
+                }
+                .buttonStyle(PlainButtonStyle())
             }
-            .buttonStyle(PlainButtonStyle())
             
             Spacer()
         }
