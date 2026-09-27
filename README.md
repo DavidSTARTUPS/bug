@@ -47,21 +47,22 @@ Scriptul compilează scheme-ul `ApexTelemetry`, pregătește structura `Payload/
 
 ---
 
-## 📋 Șabloane Prompt AI pentru Ingestie cu 1-Tap
+## 📋 Șabloane Prompt AI pentru Ingestie cu 1-Tap (Comanda `/log`)
 
-Când rezolvi grile la Matematică, Fizică sau probleme de Info și greșești o problemă, roagă asistentul tău AI (ChatGPT, Claude, Gemini) să îți ofere rezumatul în următorul format.
+Configurează asistentul tău AI (ChatGPT la *Custom Instructions*, Claude la *System Prompt*, sau Gemini) cu următoarea regulă:
 
-### Format Markdown Recomandat (Copiază și dă Paste direct în aplicație):
+> **Regulă de Sistem:**
+> Când utilizatorul trimite comanda `/log` (sau `/log [detalii]`), analizează conversația sau problema anterioară și generează **EXCLUSIV** blocul de mai jos, gata de copiat:
 
 ```markdown
 ### 🔴 BUG LOG
-Materie: Matematica
-Subcategorie: Analiză Matematică (Derivate, Integrale, Limite, Asimptote)
-Sursă: Culegere UPB 2024 Grila 18
-Clasificare: Tip A
-Bug: Am aplicat L'Hopital pe forma nedeterminata 0 * infinit in loc de 0/0
-Patch: Transforma mereu f * g in f / (1/g) inainte de derivare
-Invariant: L'Hopital este valid STRICT pentru cazurile 0/0 si ∞/∞
+Materie: [Matematica | Informatica | Romana | Fizica]
+Subcategorie: [Numele exact al subcategoriei conform taxonomiei]
+Sursă: [ex: Culegere UPB 2024 Grila 18 / BAC 2023 Sub III.2]
+Clasificare: [Tip A | Tip B | Tip C]
+Bug: [Descrierea erorii / ce am greșit / blocajul cognitiv]
+Patch: [Regula mecanică imperativă de acțiune pentru viitor]
+Invariant: [Formula matematică exactă, teorema sau proprietatea algoritmică invariantă]
 ```
 
 ### Format JSON Alternativ:
